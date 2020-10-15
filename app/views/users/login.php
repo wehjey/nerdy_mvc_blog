@@ -6,7 +6,7 @@
                 <h2>Login</h2>
 
                 <p>Please fill in your credentials to login!</p>
-                <form action="<?php echo URL_ROOT ?>/users/register" method="POST">
+                <form action="<?php echo URL_ROOT ?>/users/login" method="POST">
                     <div class="form-group">
                         <label for="email">Email: <sup>*</sup></label>
                         <input type="email" name="email" 
