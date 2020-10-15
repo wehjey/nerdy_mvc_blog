@@ -136,7 +136,7 @@ class Users extends Controller
 
                 if ($loggedInUser) {
                     // create session 
-                    die('succcess');
+                    $this->createUserSession($loggedInUser);
                 } else {
                     $data['email_err'] = 'Credentials do not match our records';
                     $this->view('users/login', $data);
@@ -156,6 +156,48 @@ class Users extends Controller
             ];
 
             $this->view('users/login', $data);
+        }
+    }
+
+    /**
+     * Creates user session
+     *
+     * @param object $user
+     * @return void
+     */
+    public function createUserSession($user)
+    {
+        $_SESSION['user_id'] = $user->id;
+        $_SESSION['user_email'] = $user->email;
+        $_SESSION['user_name'] = $user->name;
+        redirect('pages/index');
+    }
+
+    /**
+     * Log user out
+     *
+     * @return void
+     */
+    public function logout() 
+    {
+        unset($_SESSION['user_id']);
+        unset($_SESSION['user_email']);
+        unset($_SESSION['user_name']);
+        session_destroy();
+        redirect('users/login');
+    }
+
+    /**
+     * Checks if user is logged in
+     *
+     * @return boolean
+     */
+    public function isLoggedIn()
+    {
+        if (isset($_SESSION['user_id'])) {
+            return true;
+        } else {
+            return false;
         }
     }
 }
