@@ -27,4 +27,27 @@ class User
             return false;
         }
     }
+
+    /**
+     * Register new user
+     *
+     * @param array $data
+     * @return boolean
+     */
+    public function register($data)
+    {
+        $this->db->query('INSERT INTO users (name, email, password) VALUES (:name, :email, :password)');
+
+        // bind values
+        $this->db->bind(':name', $data['name']);
+        $this->db->bind(':email', $data['email']);
+        $this->db->bind(':password', $data['password']);
+
+        // execute statement
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

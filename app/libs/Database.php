@@ -8,7 +8,7 @@
  * Return rows and results
  */
 
-class Database 
+class Database
 {
     private $host = DB_HOST;
     private $user = DB_USER;
@@ -22,7 +22,7 @@ class Database
     public function __construct()
     {
         // Set DSN
-        $dsn = 'mysql:host=' .$this->host . ';dbname=' . $this->dbname;
+        $dsn = 'mysql:host=' . $this->host . ';dbname=' . $this->dbname;
         $options = [
             PDO::ATTR_PERSISTENT => true,
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
@@ -31,7 +31,7 @@ class Database
         // create PDO instance
         try {
             $this->dbh = new PDO($dsn, $this->user, $this->password, $options);
-        } catch(PDOException $e) {
+        } catch (PDOException $e) {
             $this->error = $e->getMessage();
             echo $this->error;
         }
@@ -42,7 +42,7 @@ class Database
      * @param string $sql
      * @return void
      */
-    public function query($sql) 
+    public function query($sql)
     {
         $this->statement = $this->dbh->prepare($sql);
     }
@@ -54,7 +54,7 @@ class Database
      * @param int $type
      * @return void
      */
-    public function bind($param, $value, $type = null) 
+    public function bind($param, $value, $type = null)
     {
         if (is_null($type)) {
             switch (true) {
@@ -78,7 +78,7 @@ class Database
     /**
      * Execute the prepared statement
      */
-    public function execute() 
+    public function execute()
     {
         return $this->statement->execute();
     }
@@ -86,7 +86,7 @@ class Database
     /**
      * Get result set as array of objects
      */
-    public function resultSet() 
+    public function resultSet()
     {
         $this->execute();
         return $this->statement->fetchAll(PDO::FETCH_OBJ);
@@ -95,7 +95,7 @@ class Database
     /**
      * Get single result a object
      */
-    public function single() 
+    public function single()
     {
         $this->execute();
         return $this->statement->fetch(PDO::FETCH_OBJ);

@@ -2,8 +2,6 @@
 
 class Users extends Controller
 {
-    // Users Controller
-
     public function __construct()
     {
         // instantiate user model
@@ -64,7 +62,16 @@ class Users extends Controller
 
             // make sure errors are empty
             if (empty($data['email_err']) && empty($data['name_err']) && empty($data['password_err']) && empty($data['confirm_password_err'])) {
-                die('success');
+                
+                // hash password
+                $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+
+                // Register User
+                if ($this->userModel->register($data)) {
+                    redirect('users/login');
+                } else {
+                    die('Whoops! An error occured.');
+                }
             } else {
                 // load views with errors
                 $this->view('users/register', $data);
