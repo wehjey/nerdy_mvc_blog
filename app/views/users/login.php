@@ -4,6 +4,7 @@
         <div class="col-md-6 mx-auto">
             <div class="card card-body bg-light mt-5">
                 <?php flash('register_success') ?>
+                <?php flash('redirect_user') ?>
 
                 <h2>Login</h2>
 
