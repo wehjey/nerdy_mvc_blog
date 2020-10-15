@@ -29,4 +29,28 @@ class Post
         $results = $this->db->resultSet();
         return $results;
     }
+
+    /**
+     * Add post to database
+     *
+     * @param array $data
+     * @return void
+     */
+    public function addPost($data)
+    {
+        $this->db->query('INSERT INTO posts (title, body, user_id) VALUES (:title, :body, :user_id)');
+
+        // bind values
+        $this->db->bind(':title', $data['title']);
+        $this->db->bind(':body', $data['body']);
+        $this->db->bind(':user_id', $data['user_id']);
+
+        // execute statement
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
 }

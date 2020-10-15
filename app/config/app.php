@@ -8,7 +8,7 @@
 define('APP_ROOT', dirname(dirname(__FILE__)));
 
 // URL Root
-define('URL_ROOT', 'http://localhost/shareposts/');
+define('URL_ROOT', 'http://localhost/shareposts');
 
 // Site name
 define('SITE_NAME', 'SharePosts');

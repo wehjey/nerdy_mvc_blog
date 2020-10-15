@@ -1,11 +1,13 @@
 <?php require APP_ROOT . '/views/includes/header.php'; ?>
 
+<?php flash('post_message') ?>
+
 <div class="row">
     <div class="col-md-6">
         <h1>Posts</h1>
     </div>
     <div class="col-md-6">
-        <a href="<?php echo URL_ROOT; ?>" class="btn btn-primary pull-right">
+        <a href="<?php echo URL_ROOT; ?>/posts/add" class="btn btn-primary pull-right">
             <i class="fa fa-pencil"></i> Add Post
         </a>
     </div>
