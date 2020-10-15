@@ -41,7 +41,6 @@ class Users extends Controller
                 }
             }
 
-
             if (empty($data['name'])) {
                 $data['name_err'] = 'Please enter name!';
             }
@@ -122,9 +121,26 @@ class Users extends Controller
                 $data['password_err'] = 'Please enter password!';
             }
 
+            // check for user email exists
+            if ($this->userModel->findUserByEmail($data['email'])) {
+
+            } else {
+                $data['email_err'] = 'Credentials do not match our records';
+            }
+
             // make sure errors are empty
             if (empty($data['email_err']) && empty($data['password_err'])) {
-                die('success');
+                // check and set logged in user
+
+                $loggedInUser = $this->userModel->login($data['email'], $data['password']);
+
+                if ($loggedInUser) {
+                    // create session 
+                    die('succcess');
+                } else {
+                    $data['email_err'] = 'Credentials do not match our records';
+                    $this->view('users/login', $data);
+                }
             } else {
                 // load views with errors
                 $this->view('users/login', $data);
