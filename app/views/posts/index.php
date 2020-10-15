@@ -24,7 +24,7 @@
             written by <?php echo $post->name ?> on <?php echo $post->post_created_at ?>
         </div>
         <p class="card-text"><?php echo $post->body ?></p>
-        <a href="<?php echo URL_ROOT ?>/post/show/<?php echo $post->postId ?>" class="btn btn-dark">more</a>
+        <a href="<?php echo URL_ROOT ?>/posts/show/<?php echo $post->postId ?>" class="btn btn-dark">more</a>
     </div>
 <?php endforeach ?>
 

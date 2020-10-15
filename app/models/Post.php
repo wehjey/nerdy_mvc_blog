@@ -51,6 +51,19 @@ class Post
         } else {
             return false;
         }
+    }
 
+    /**
+     * Get post by id
+     *
+     * @param int $id
+     * @return object
+     */
+    public function getPostById($id) 
+    {
+        $this->db->query('SELECT * FROM posts WHERE id = :id');
+        $this->db->bind(':id', $id);
+        $row = $this->db->single();
+        return $row;
     }
 }
